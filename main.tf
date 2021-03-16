@@ -88,13 +88,20 @@ resource "aws_mq_broker" "default" {
 
   logs {
     general = var.general_log_enabled
-    audit   = var.audit_log_enabled
   }
 
   maintenance_window_start_time {
     day_of_week = var.maintenance_day_of_week
     time_of_day = var.maintenance_time_of_day
     time_zone   = var.maintenance_time_zone
+  }
+
+  dynamic "user" {
+    for_each = var.encryption_enabled ? ["true"] : []
+    content {
+      kms_key_id        = var.kms_mq_key_arn
+      use_aws_owned_key = var.use_aws_owned_key
+    }
   }
 
   user {
