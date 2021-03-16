@@ -86,10 +86,6 @@ resource "aws_mq_broker" "default" {
     }
   }
 
-  logs {
-    general = var.general_log_enabled
-  }
-
   maintenance_window_start_time {
     day_of_week = var.maintenance_day_of_week
     time_of_day = var.maintenance_time_of_day
