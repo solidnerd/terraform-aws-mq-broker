@@ -96,14 +96,6 @@ resource "aws_mq_broker" "default" {
     time_zone   = var.maintenance_time_zone
   }
 
-  dynamic "user" {
-    for_each = var.encryption_enabled ? ["true"] : []
-    content {
-      kms_key_id        = var.kms_mq_key_arn
-      use_aws_owned_key = var.use_aws_owned_key
-    }
-  }
-
   user {
     username       = local.mq_admin_user
     password       = local.mq_admin_password
