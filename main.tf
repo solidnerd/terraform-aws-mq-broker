@@ -66,6 +66,7 @@ resource "aws_ssm_parameter" "mq_application_password" {
 }
 
 resource "aws_mq_broker" "default" {
+
   broker_name                = module.this.id
   deployment_mode            = var.deployment_mode
   engine_type                = var.engine_type
@@ -103,8 +104,4 @@ resource "aws_mq_broker" "default" {
     console_access = true
   }
 
-  user {
-    username = local.mq_application_user
-    password = local.mq_application_password
-  }
 }
