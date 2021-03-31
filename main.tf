@@ -88,4 +88,11 @@ resource "aws_mq_broker" "default" {
     username       = local.mq_admin_user
     password       = local.mq_admin_password
   }
+
+  lifecycle {
+    ignore_changes = [
+      logs
+    ]
+  }
+
 }
